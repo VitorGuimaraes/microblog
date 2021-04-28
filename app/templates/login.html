@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Sign In</h1>
+    <!-- O atributo action do form indica para qual rota o form deve ser submetido -->
+    <!-- Uma string vazia indica que a rota é a url atual -->
+    <!-- É possível submeter um formulário com get, mas não é uma boa prática -->
+    <form action="" method="post">
+        {{ form.hidden_tag() }} <!-- Protege a aplicação contra cross-site scripting -->
+        <p>
+            {{ form.username.label }} <br>
+            {{ form.username(size=32) }}  <!-- tamanho da fonte: 32 -->
+            {% for error in form.username.errors %}
+            <span style="color: red;">{{error}}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password.label }} <br>
+            {{ form.password(size=32) }}
+            {% for error in form.password.errors %}
+            <span style="color: red;">{{error}}</span>
+            {% endfor %}
+        </p>
+        <p>
+            <!-- Nesse caso vamos primeiro renderizar o checkbox e depois a label -->
+            {{ form.remember_me() }}
+            {{ form.remember_me.label }}
+        </p>
+        <p>
+            <!-- Em butões a label já é incorporada no texto do botão -->
+            {{ form.submit() }}
+        </p>
+
+    </form>
+{% endblock %}
+
+
